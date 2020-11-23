@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.test2.demo.dao.TestDao">  <!--指定mapper对应的dao,这样mapper就会实现dao对应的方法-->
+    <select id="queryArea" resultType="com.test2.demo.entity.Test1"><!--编写sql语句-->
+		SELECT test_id, test_name
+		FROM test
+		ORDER BY test_id
+		DESC
+	</select>
+    <select id="queryAreaById" resultType="com.test2.demo.entity.Test1">
+		SELECT test_name, test_id
+		FROM test
+		WHERE
+		test_id=#{test_id}
+	</select>
+    <insert id="insertArea" useGeneratedKeys="true" keyProperty="test_id)"
+            keyColumn="area_id" parameterType="com.est2.demo.entity.Test">
+		INSERT INTO
+		test(test_name)
+		VALUES
+		(#{areaName})
+	</insert>
+    <update id="updateArea" parameterType="com.est2.demo.entity.Test">
+        update test
+        <set>
+            <if test="test_name != null">area_name=#{areaName},</if>
+        </set>
+        where test_id=#{test_id}
+    </update>
+    <delete id="deleteArea">
+		DELETE FROM
+		test
+		WHERE
+		test_id=
+		#{test_id}
+	</delete>
+</mapper>
+
+
