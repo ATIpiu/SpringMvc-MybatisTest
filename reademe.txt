@@ -1,0 +1,2 @@
+一个简单的Spring配置项目，后续如果想起来回去写点注释，
+其中ApplicationContext.xml里面有密码我新建了一个txt，可以复制粘贴到一个Spring.xml改上自己的数据库地址和密码就行了
