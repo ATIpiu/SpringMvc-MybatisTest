@@ -2,8 +2,41 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.test2.demo.dao.TestDao">
-    <select id="queryTest" resultType="com.test2.demo.entity.Test1">
-        select * from test
-    </select>
+
+<mapper namespace="com.test2.demo.dao.TestDao">  <!--指定mapper对应的dao,这样mapper就会实现dao对应的方法-->
+    <select id="queryTest" resultType="com.test2.demo.entity.Test1"><!--编写sql语句-->
+		SELECT test_id, test_name
+		FROM test
+		ORDER BY test_id
+		DESC
+	</select>
+    <select id="queryTestById" resultType="com.test2.demo.entity.Test1">
+		SELECT test_name, test_id
+		FROM test
+		WHERE
+		test_id=#{test_id}
+	</select>
+    <insert id="insertTest" useGeneratedKeys="true" keyProperty="test_id" keyColumn="test_id"
+             parameterType="com.test2.demo.entity.Test1">
+		INSERT INTO
+		test(test_name)
+		VALUES
+		(#{test_name})
+	</insert>
+    <update id="updateArea" parameterType="com.test2.demo.entity.Test1">
+        update test
+        <set>
+            <if test="test_name != null">area_name=#{test_name},</if>
+        </set>
+        where test_id=#{test_id}
+    </update>
+    <delete id="deleteArea">
+		DELETE FROM
+		test
+		WHERE
+		test_id=
+		#{test_id}
+	</delete>
 </mapper>
+
+

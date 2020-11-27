@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.print.DocFlavor;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
@@ -30,6 +31,32 @@ public class TestController{
             System.out.println(test1);
         }
         map.put("list",tests);
+        System.out.println("微信小程序调用完成。。。");
+        return map;
+    }
+    @RequestMapping(value = "hello1",method = RequestMethod.GET)
+    public Map<String, Object> getUser2(String test_id) {
+        System.out.println(test_id);
+        System.out.println("微信小程序正在调用。。。");
+        Map<String, Object> map = new HashMap<String, Object>();
+        ApplicationContext ctx=new ClassPathXmlApplicationContext("ApplicationContext.xml");
+        TestDao testDao= (TestDao) ctx.getBean("testDao");
+
+        Test1 test=testDao.queryTestById(Integer.parseInt(test_id));
+        map.put("list",test);
+        System.out.println("微信小程序调用完成。。。");
+        return map;
+    }
+    @RequestMapping(value = "hello2",method = RequestMethod.GET)
+    public Map<String, Object> getUser3(String name) {
+        System.out.println(name);
+        System.out.println("微信小程序正在调用。。。");
+        Map<String, Object> map = new HashMap<String, Object>();
+        ApplicationContext ctx=new ClassPathXmlApplicationContext("ApplicationContext.xml");
+        TestDao testDao= (TestDao) ctx.getBean("testDao");
+        Test1 test=new Test1(name);
+        testDao.insertTest(test);
+        map.put("list",test);
         System.out.println("微信小程序调用完成。。。");
         return map;
     }

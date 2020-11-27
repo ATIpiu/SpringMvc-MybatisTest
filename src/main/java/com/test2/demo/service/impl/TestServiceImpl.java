@@ -3,9 +3,10 @@ package com.test2.demo.service.impl;
 import com.test2.demo.dao.TestDao;
 import com.test2.demo.entity.Test1;
 import com.test2.demo.service.TestService;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
 public class TestServiceImpl implements TestService {
 
     private TestDao testDao;
@@ -22,12 +23,15 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public Test1 getTestById(int test_id) {
-        return null;
+
+        Test1 test1=testDao.queryTestById(test_id);
+        return test1;
     }
 
     @Override
     public boolean addTest(Test1 test) {
-        return false;
+        testDao.insertTest(test);
+        return true;
     }
 
     @Override
