@@ -34,22 +34,9 @@ public class TestController{
         System.out.println("微信小程序调用完成。。。");
         return map;
     }
-    @RequestMapping(value = "hello1",method = RequestMethod.GET)
-    public Map<String, Object> getUser2(String test_id) {
-        System.out.println(test_id);
-        System.out.println("微信小程序正在调用。。。");
-        Map<String, Object> map = new HashMap<String, Object>();
-        ApplicationContext ctx=new ClassPathXmlApplicationContext("ApplicationContext.xml");
-        TestDao testDao= (TestDao) ctx.getBean("testDao");
 
-        Test1 test=testDao.queryTestById(Integer.parseInt(test_id));
-        map.put("list",test);
-        System.out.println("微信小程序调用完成。。。");
-        return map;
-    }
     @RequestMapping(value = "hello2",method = RequestMethod.GET)
     public Map<String, Object> getUser3(String name) {
-        System.out.println(name);
         System.out.println("微信小程序正在调用。。。");
         Map<String, Object> map = new HashMap<String, Object>();
         ApplicationContext ctx=new ClassPathXmlApplicationContext("ApplicationContext.xml");
@@ -60,17 +47,19 @@ public class TestController{
         System.out.println("微信小程序调用完成。。。");
         return map;
     }
+
+    /**
+     *
+     * 普通上传到本地文件的处理文件函数
+     */
     @RequestMapping("/upload")
     public String upload(@RequestParam("file") MultipartFile file, HttpServletRequest req)
             throws IllegalStateException, IOException {
         // 判断文件是否为空，空则返回失败页面
         if (file.isEmpty()) {
-
             return "failed";
         }
-
         String fileName = file.getOriginalFilename();
-
         // 创建文件实例
         File filePath = new File("D:/ImageFile", fileName);
         // 如果文件目录不存在，创建目录
